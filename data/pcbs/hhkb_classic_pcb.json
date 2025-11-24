@@ -1,0 +1,10 @@
+{
+  "id": "hhkb_classic_pcb",
+  "name": "HHKB Classic OEM PCB",
+  "manufacturer": "PFU",
+  "layout": "HHKB ANSI",
+  "connector_type": "HHKB ribbon cable",
+  "release_date": "2019-12-10",
+  "compatible_controllers": ["hhkb_classic_controller"],
+  "notes": "Official PCB used in HHKB Classic models"
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "id": 0,
+    "name": "HHKB Professional OEM PCB",
+    "supports_bluetooth": false,
+    "layout": "HHKB ANSI",
+    "manufacturer": "PFU",
+    "connector_type": "HHKB ribbon cable",
+    "release_date": "2003-04-24",
+    "notes": "Original PCB used in HHKB Professional models"
+  },
+  {
+    "id": 1,
+    "name": "HHKB Classic/Pro2 OEM PCB",
+    "supports_bluetooth": false,
+    "layout": "HHKB ANSI",
+    "manufacturer": "PFU",
+    "connector_type": "HHKB ribbon cable",
+    "release_date": "2006-12-01",
+    "notes": "Official PCB used in HHKB Professional 2 and Classic models"
+  },
+  {
+    "id": 2,
+    "name": "HHKB Hybrid OEM PCB",
+    "supports_bluetooth": true,
+    "layout": "HHKB ANSI",
+    "manufacturer": "PFU",
+    "connector_type": "HHKB ribbon cable",
+    "release_date": "2019-12-10",
+    "notes": "Official PCB used in HHKB Hybrid models with Bluetooth support"
+  }
+]

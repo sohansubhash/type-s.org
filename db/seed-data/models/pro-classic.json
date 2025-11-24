@@ -1,0 +1,32 @@
+[
+  {
+    "id": 20,
+    "model_number": "PD-KB800B",
+    "model_name": "Happy Hacking Keyboard Classic",
+    "layout": "HHKB ANSI",
+    "case_color": "Black",
+    "keycap_color": "Black",
+    "legends": "White",
+    "release_date": "2019-12-10",
+    "generation": "Classic",
+    "type_s": false,
+    "pcb_id": 1,
+    "controller_id": 1,
+    "notes": "USB-C update to Professional 2, released alongside Hybrid"
+  },
+  {
+    "id": 21,
+    "model_number": "PD-KB800W",
+    "model_name": "Happy Hacking Keyboard Classic",
+    "layout": "HHKB ANSI",
+    "case_color": "White",
+    "keycap_color": "White",
+    "legends": "Gray",
+    "release_date": "2019-12-10",
+    "generation": "Classic",
+    "type_s": false,
+    "pcb_id": 1,
+    "controller_id": 1,
+    "notes": "White Classic variant"
+  }
+]

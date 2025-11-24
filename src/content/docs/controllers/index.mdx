@@ -1,0 +1,44 @@
+---
+title: HHKB Controllers
+description: Complete list of HHKB controllers and their specifications
+---
+
+import { db, Controllers, PcbControllerCompatibility, Pcbs } from 'astro:db';
+import { eq } from 'astro:db';
+
+export const controllers = await db.select().from(Controllers);
+
+# HHKB Controllers
+
+Below is a complete list of HHKB controllers in our database.
+
+{controllers.map(async (controller) => {
+  const compatiblePcbs = await db
+    .select({ pcb: Pcbs })
+    .from(PcbControllerCompatibility)
+    .innerJoin(Pcbs, eq(PcbControllerCompatibility.pcb_id, Pcbs.id))
+    .where(eq(PcbControllerCompatibility.controller_id, controller.id));
+
+  return (
+    <div key={controller.id} style="border: 1px solid #ccc; padding: 1rem; margin: 1rem 0; border-radius: 8px;">
+      <h2>{controller.name}</h2>
+      <ul>
+        <li><strong>Manufacturer:</strong> {controller.manufacturer || 'N/A'}</li>
+        <li><strong>Bluetooth:</strong> {controller.supports_bluetooth ? 'Yes' : 'No'}</li>
+        <li><strong>Firmware:</strong> {controller.firmware || 'N/A'}</li>
+        {controller.notes && <li><strong>Notes:</strong> {controller.notes}</li>}
+      </ul>
+
+      {compatiblePcbs.length > 0 && (
+        <>
+          <h3>Compatible PCBs:</h3>
+          <ul>
+            {compatiblePcbs.map((cp) => (
+              <li key={cp.pcb.id}>{cp.pcb.name}</li>
+            ))}
+          </ul>
+        </>
+      )}
+    </div>
+  );
+})}

@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "model_number": "PD-KB300",
+    "model_name": "Happy Hacking Keyboard Professional",
+    "layout": "HHKB ANSI",
+    "case_color": "White",
+    "keycap_color": "White",
+    "legends": "Grey, Left Aligned",
+    "release_date": "2003-04-24",
+    "generation": "Professional",
+    "type_s": false,
+    "pcb_id": 0,
+    "controller_id": 0,
+    "notes": "Original Professional model, white with dye-sublimated grey legends"
+  },
+  {
+    "id": 2,
+    "model_number": "PD-KB300B",
+    "model_name": "Happy Hacking Keyboard Professional",
+    "layout": "HHKB ANSI",
+    "case_color": "Charcoal",
+    "keycap_color": "Charcoal",
+    "legends": "Dark Grey, Left Aligned",
+    "release_date": "2003-04-24",
+    "generation": "Professional",
+    "type_s": false,
+    "pcb_id": 0,
+    "controller_id": 0,
+    "notes": "Charcoal variant with dye-sublimated dark grey legends"
+  },
+  {
+    "id": 3,
+    "model_number": "PD-KB300NL",
+    "model_name": "Happy Hacking Keyboard Professional",
+    "layout": "HHKB ANSI",
+    "case_color": "White",
+    "keycap_color": "White",
+    "legends": "Blank",
+    "release_date": "2003-04-24",
+    "generation": "Professional",
+    "type_s": false,
+    "pcb_id": 0,
+    "controller_id": 0,
+    "notes": "White variant with blank keycaps"
+  },
+  {
+    "id": 4,
+    "model_number": "PD-KB300BN",
+    "model_name": "Happy Hacking Keyboard Professional",
+    "layout": "HHKB ANSI",
+    "case_color": "Charcoal",
+    "keycap_color": "Charcoal",
+    "legends": "Blank",
+    "release_date": "2003-04-24",
+    "generation": "Professional",
+    "type_s": false,
+    "pcb_id": 0,
+    "controller_id": 0,
+    "notes": "Charcoal variant with blank keycaps"
+  }
+]
