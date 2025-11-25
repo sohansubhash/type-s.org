@@ -1,0 +1,57 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: system-ui, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+      nav {
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid #eee;
+      }
+      nav a {
+        margin-right: 1.5rem;
+        text-decoration: none;
+        color: #0066cc;
+      }
+      nav a:hover {
+        text-decoration: underline;
+      }
+      h1 {
+        margin-bottom: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/models">Models</a>
+      <a href="/pcbs">PCBs</a>
+      <a href="/controllers">Controllers</a>
+    </nav>
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@type-s/schema": ["../../libs/schema/index.ts"],
+      "@type-s/schema/*": ["../../libs/schema/*"],
+      "@type-s/data": ["../../libs/data"],
+      "@type-s/data/*": ["../../libs/data/*"]
+    }
+  },
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"]
+}

@@ -1,0 +1,73 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getDb } from '../lib/db';
+import * as schema from '@type-s/schema';
+import { eq } from 'drizzle-orm';
+
+const db = getDb(Astro.locals.runtime.env.DB);
+const models = await db.select().from(schema.hhkbModels);
+
+const generations = models.reduce((acc, model) => {
+  if (!acc[model.generation]) {
+    acc[model.generation] = [];
+  }
+  acc[model.generation].push(model);
+  return acc;
+}, {} as Record<string, typeof models>);
+---
+
+<Layout title="PFU HHKB Models">
+  <h1>PFU HHKB Models</h1>
+  <p>Official HHKB keyboards manufactured by PFU, organized by generation.</p>
+
+  <div style="margin-top: 2rem;">
+    {Object.entries(generations).map(async ([generation, genModels]) => {
+      return (
+        <div style="margin: 2rem 0;">
+          <h2>{generation}</h2>
+          <div style="display: grid; gap: 1rem; margin-top: 1rem;">
+            {genModels.map(async (model) => {
+              const pcbResult = model.pcbId ? await db.select().from(schema.pcbs).where(eq(schema.pcbs.id, model.pcbId)) : [];
+              const controllerResult = model.controllerId ? await db.select().from(schema.controllers).where(eq(schema.controllers.id, model.controllerId)) : [];
+              const pcb = pcbResult[0];
+              const controller = controllerResult[0];
+
+              return (
+                <div style="border: 1px solid #ccc; padding: 1rem; border-radius: 8px;">
+                  <h3>{model.modelName} {model.typeS ? 'Type-S' : ''}</h3>
+                  <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; font-size: 0.9rem; margin-top: 0.5rem;">
+                    <div><strong>Model Number:</strong> {model.modelNumber}</div>
+                    <div><strong>Layout:</strong> {model.layout}</div>
+                    <div><strong>Case Color:</strong> {model.caseColor}</div>
+                    <div><strong>Keycap Color:</strong> {model.keycapColor}</div>
+                    <div><strong>Legends:</strong> {model.legends}</div>
+                    <div><strong>Type-S:</strong> {model.typeS ? 'Yes' : 'No'}</div>
+                    {model.releaseDate && (
+                      <div><strong>Release Date:</strong> {new Date(model.releaseDate).toLocaleDateString()}</div>
+                    )}
+                  </div>
+
+                  {(pcb || controller) && (
+                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #eee;">
+                      <h4 style="margin: 0 0 0.5rem 0; font-size: 0.9rem;">Components</h4>
+                      <div style="font-size: 0.85rem;">
+                        {pcb && <div>• PCB: {pcb.name}</div>}
+                        {controller && <div>• Controller: {controller.name}</div>}
+                      </div>
+                    </div>
+                  )}
+
+                  {model.notes && (
+                    <div style="margin-top: 0.5rem; font-size: 0.85rem; font-style: italic; color: #666;">
+                      {model.notes}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      );
+    })}
+  </div>
+</Layout>

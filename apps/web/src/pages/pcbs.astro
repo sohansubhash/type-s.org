@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getDb } from '../lib/db';
+import * as schema from '@type-s/schema';
+
+const db = getDb(Astro.locals.runtime.env.DB);
+const pcbs = await db.select().from(schema.pcbs);
+---
+
+<Layout title="HHKB PCBs">
+  <h1>HHKB PCBs</h1>
+  <p>Complete list of HHKB PCBs and their specifications.</p>
+
+  <div style="margin-top: 2rem;">
+    {pcbs.map((pcb) => (
+      <div style="border: 1px solid #ccc; padding: 1rem; margin: 1rem 0; border-radius: 8px;">
+        <h2>{pcb.name}</h2>
+        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+          <li><strong>Layout:</strong> {pcb.layout}</li>
+          <li><strong>Manufacturer:</strong> {pcb.manufacturer || 'N/A'}</li>
+          <li><strong>Bluetooth:</strong> {pcb.supportsBluetooth ? 'Yes' : 'No'}</li>
+          <li><strong>Connector:</strong> {pcb.connectorType || 'N/A'}</li>
+          {pcb.releaseDate && <li><strong>Release Date:</strong> {new Date(pcb.releaseDate).toLocaleDateString()}</li>}
+          {pcb.notes && <li><strong>Notes:</strong> {pcb.notes}</li>}
+        </ul>
+      </div>
+    ))}
+  </div>
+</Layout>

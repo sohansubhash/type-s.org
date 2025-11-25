@@ -1,18 +1,30 @@
 {
-  "name": "",
+  "name": "type-s-monorepo",
+  "version": "0.1.0",
+  "private": true,
   "type": "module",
-  "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "dev": "pnpm --filter web dev",
+    "dev:web": "pnpm --filter web dev",
+    "dev:bot": "pnpm --filter bot dev",
+    "build": "pnpm --filter web build",
+    "build:web": "pnpm --filter web build",
+    "build:bot": "pnpm --filter bot build",
+    "preview": "pnpm --filter web preview",
+    "preview:web": "pnpm --filter web preview",
+    "db:generate": "pnpm --filter web db:generate",
+    "db:migrate:local": "pnpm --filter web db:migrate:local",
+    "db:migrate:prod": "pnpm --filter web db:migrate:prod",
+    "db:studio": "pnpm --filter web db:studio",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md,mdx,astro}\"",
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md,mdx,astro}\""
+  },
+  "devDependencies": {
+    "prettier": "^3.4.2",
+    "prettier-plugin-astro": "^0.14.1",
+    "typescript": "^5.7.2"
   },
   "dependencies": {
-    "@astrojs/db": "^0.18.0",
-    "@astrojs/starlight": "^0.36.1",
-    "astro": "^5.6.1",
-    "sharp": "^0.34.2"
+    "drizzle-orm": "^0.44.7"
   }
 }

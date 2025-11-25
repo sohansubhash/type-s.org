@@ -1,0 +1,12 @@
+{
+  "name": "@type-s/data",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./manufacturers/*": "./manufacturers/*.json",
+    "./pcbs/*": "./pcbs/*.json",
+    "./controllers/*": "./controllers/*.json",
+    "./models/*": "./models/*.json"
+  }
+}
