@@ -23,7 +23,7 @@ const getLocalD1 = () => {
 
 export default {
   out: "./drizzle/migrations",
-  schema: "../../libs/schema/**/*.ts",
+  schema: "./libs/schema/**/*.ts",
   dialect: "sqlite",
   dbCredentials: {
     url: getLocalD1(),

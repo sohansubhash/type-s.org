@@ -5,6 +5,20 @@ import * as schema from '@type-s/schema';
 
 const db = getDb(Astro.locals.runtime.env.DB);
 const manufacturers = await db.select().from(schema.manufacturers);
+
+function formatValue(key: string, value: any): string | null {
+  if (value === null || value === undefined) return null;
+  return String(value);
+}
+
+function formatFieldName(key: string): string {
+  return key
+    .split('_')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
+const excludeFields = ['id', 'name'];
 ---
 
 <Layout title="Manufacturers">
@@ -16,9 +30,30 @@ const manufacturers = await db.select().from(schema.manufacturers);
       <div style="border: 1px solid #ccc; padding: 1rem; margin: 1rem 0; border-radius: 8px;">
         <h2>{mfr.name}</h2>
         <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-          {mfr.country && <li><strong>Country:</strong> {mfr.country}</li>}
-          {mfr.established && <li><strong>Established:</strong> {mfr.established}</li>}
-          {mfr.url && <li><strong>Website:</strong> <a href={mfr.url} target="_blank" rel="noopener noreferrer">{mfr.url}</a></li>}
+          {Object.entries(mfr)
+            .filter(([key]) => !excludeFields.includes(key))
+            .map(([key, value]) => {
+              const formattedValue = formatValue(key, value);
+              if (!formattedValue) return null;
+
+              if (key === 'url') {
+                return (
+                  <li>
+                    <strong>Website:</strong>{' '}
+                    <a href={String(value)} target="_blank" rel="noopener noreferrer">
+                      {String(value)}
+                    </a>
+                  </li>
+                );
+              }
+
+              return (
+                <li>
+                  <strong>{formatFieldName(key)}:</strong> {formattedValue}
+                </li>
+              );
+            })
+          }
         </ul>
       </div>
     ))}

@@ -12,18 +12,24 @@
     "build:bot": "pnpm --filter bot build",
     "preview": "pnpm --filter web preview",
     "preview:web": "pnpm --filter web preview",
-    "db:generate": "pnpm --filter web db:generate",
-    "db:migrate:local": "pnpm --filter web db:migrate:local",
-    "db:migrate:prod": "pnpm --filter web db:migrate:prod",
-    "db:studio": "pnpm --filter web db:studio",
+    "db:generate": "NODE_OPTIONS='--import tsx' drizzle-kit generate",
+    "db:migrate:local": "wrangler d1 migrations apply type-s-db --local",
+    "db:migrate:prod": "wrangler d1 migrations apply type-s-db --remote",
+    "db:studio": "NODE_OPTIONS='--import tsx' drizzle-kit studio",
     "db:seed:local": "pnpm --filter @type-s/data seed:local",
+    "db:seed:prod": "pnpm --filter @type-s/data seed:prod",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md,mdx,astro}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md,mdx,astro}\""
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250921.0",
+    "@types/node": "^24.5.2",
+    "drizzle-kit": "0.31.7",
     "prettier": "^3.4.2",
     "prettier-plugin-astro": "^0.14.1",
-    "typescript": "^5.7.2"
+    "tsx": "^4.20.6",
+    "typescript": "^5.7.2",
+    "wrangler": "^4.38.0"
   },
   "dependencies": {
     "drizzle-orm": "^0.44.7"

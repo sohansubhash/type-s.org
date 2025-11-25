@@ -1,48 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getDb } from '../lib/db';
-import * as schema from '@type-s/schema';
-import { eq } from 'drizzle-orm';
-
-const db = getDb(Astro.locals.runtime.env.DB);
-const pcbs = await db.select().from(schema.pcbs);
-
-// Get manufacturer names - use snake_case since casing option isn't converting
-const pcbsWithManufacturers = await Promise.all(
-  pcbs.map(async (pcb) => {
-    if (!pcb.manufacturer_id) {
-      return { ...pcb, manufacturer: null };
-    }
-    const manufacturerResult = await db
-      .select()
-      .from(schema.manufacturers)
-      .where(eq(schema.manufacturers.id, pcb.manufacturer_id));
-    return {
-      ...pcb,
-      manufacturer: manufacturerResult[0],
-    };
-  })
-);
+import PartsList from '../components/PartsList.astro';
 ---
 
 <Layout title="HHKB PCBs">
-  <h1>HHKB PCBs</h1>
-  <p>Complete list of HHKB PCBs and their specifications.</p>
-
-  <div style="margin-top: 2rem;">
-    {pcbsWithManufacturers.map((pcb) => (
-      <div style="border: 1px solid #ccc; padding: 1rem; margin: 1rem 0; border-radius: 8px;">
-        <h2>{pcb.name}</h2>
-        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-          <li><strong>Layout:</strong> {pcb.layout}</li>
-          <li><strong>Manufacturer:</strong> {pcb.manufacturer?.name || 'N/A'}</li>
-          <li><strong>Bluetooth:</strong> {pcb.supports_bluetooth ? 'Yes' : 'No'}</li>
-          <li><strong>Connector:</strong> {pcb.connector_type || 'N/A'}</li>
-          {pcb.url && <li><strong>URL:</strong> <a href={pcb.url} target="_blank" rel="noopener noreferrer">{pcb.url}</a></li>}
-          {pcb.release_date && <li><strong>Release Date:</strong> {new Date(pcb.release_date).toLocaleDateString()}</li>}
-          {pcb.notes && <li><strong>Notes:</strong> {pcb.notes}</li>}
-        </ul>
-      </div>
-    ))}
-  </div>
+  <PartsList
+    tableName="pcbs"
+    title="HHKB PCBs"
+    description="Complete list of HHKB PCBs and their specifications."
+  />
 </Layout>

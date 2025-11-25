@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "b3fd0a1b-78d6-4486-a669-d0ab6332659c",
+  "id": "057078a4-fb3f-40e4-bf80-ab3c772ff444",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "hhkb_models": {

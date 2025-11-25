@@ -1,27 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getDb } from '../lib/db';
-import * as schema from '@type-s/schema';
-
-const db = getDb(Astro.locals.runtime.env.DB);
-const plates = await db.select().from(schema.plates);
+import PartsList from '../components/PartsList.astro';
 ---
 
 <Layout title="HHKB Plates">
-  <h1>HHKB Plates</h1>
-  <p>Complete list of HHKB plates and mounting options.</p>
-
-  <div style="margin-top: 2rem;">
-    {plates.map((plate) => (
-      <div style="border: 1px solid #ccc; padding: 1rem; margin: 1rem 0; border-radius: 8px;">
-        <h2>{plate.name}</h2>
-        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-          <li><strong>Part Number:</strong> {plate.partNumber || 'N/A'}</li>
-          <li><strong>Material:</strong> {plate.material}</li>
-          <li><strong>Integrated:</strong> {plate.integrated ? 'Yes' : 'No'}</li>
-          {plate.description && <li><strong>Description:</strong> {plate.description}</li>}
-        </ul>
-      </div>
-    ))}
-  </div>
+  <PartsList
+    tableName="plates"
+    title="HHKB Plates"
+    description="Complete list of HHKB plates and mounting options."
+  />
 </Layout>

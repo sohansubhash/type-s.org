@@ -1,0 +1,24 @@
+# Root wrangler.toml for shared configuration
+# Used for D1 database migrations and local development
+# Separate configs for production deployment
+
+name = "type-s-web"
+compatibility_date = "2024-01-01"
+
+# Main entry point for web worker
+main = "apps/web/dist/_worker.js"
+
+[build]
+command = "pnpm --filter web build"
+
+[dev]
+port = 4321
+
+# Shared D1 database configuration
+# Both web and bot workers access this same database
+[[d1_databases]]
+binding = "DB"
+database_name = "type-s-db"
+database_id = "4f70f843-2817-4c0e-910a-5a1a02362bb8"
+preview_database_id = "DB"
+migrations_dir = "drizzle/migrations"

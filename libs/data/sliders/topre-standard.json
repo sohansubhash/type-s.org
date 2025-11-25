@@ -2,8 +2,9 @@
   "id": 1,
   "manufacturer_id": 2,
   "name": "Topre Standard Slider",
-  "description": "Standard Topre slider with tactile feedback",
-  "part_number": "TOPRE-SLIDER-STD",
+  "url": null,
+  "release_date": null,
+  "notes": "Standard Topre slider with tactile feedback. Part number: TOPRE-SLIDER-STD",
   "type": "Standard",
   "silenced": false
 }

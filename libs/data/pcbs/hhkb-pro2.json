@@ -2,6 +2,8 @@
   "id": 1,
   "manufacturer_id": 1,
   "name": "HHKB Professional 2 PCB",
+  "url": null,
+  "release_date": null,
   "notes": "Standard HHKB Professional 2 PCB with Topre switches",
   "supports_bluetooth": false,
   "layout": "HHKB 60%",

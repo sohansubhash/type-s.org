@@ -12,15 +12,30 @@ importers:
         specifier: ^0.44.7
         version: 0.44.7(@cloudflare/workers-types@4.20251121.0)(@libsql/client@0.15.15)
     devDependencies:
+      '@cloudflare/workers-types':
+        specifier: ^4.20250921.0
+        version: 4.20251121.0
+      '@types/node':
+        specifier: ^24.5.2
+        version: 24.9.1
+      drizzle-kit:
+        specifier: 0.31.7
+        version: 0.31.7
       prettier:
         specifier: ^3.4.2
         version: 3.6.2
       prettier-plugin-astro:
         specifier: ^0.14.1
         version: 0.14.1
+      tsx:
+        specifier: ^4.20.6
+        version: 4.20.6
       typescript:
         specifier: ^5.7.2
         version: 5.9.3
+      wrangler:
+        specifier: ^4.38.0
+        version: 4.50.0(@cloudflare/workers-types@4.20251121.0)
 
   apps/bot:
     dependencies:

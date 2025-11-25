@@ -2,8 +2,9 @@
   "id": 1,
   "manufacturer_id": 1,
   "name": "HHKB Integrated Plate",
-  "description": "Integrated plate design used in standard HHKB keyboards",
-  "part_number": "HHKB-PLATE-INT",
+  "url": null,
+  "release_date": null,
+  "notes": "Integrated plate design used in standard HHKB keyboards. Part number: HHKB-PLATE-INT",
   "material": "ABS Plastic",
   "integrated": true
 }

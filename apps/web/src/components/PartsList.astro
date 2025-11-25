@@ -1,0 +1,117 @@
+---
+/**
+ * Generic parts list component
+ * Automatically renders any table's data based on schema
+ */
+import { getDb } from '../lib/db';
+import * as schema from '@type-s/schema';
+import { eq } from 'drizzle-orm';
+
+interface Props {
+  tableName: keyof typeof schema;
+  title: string;
+  description: string;
+}
+
+const { tableName, title, description } = Astro.props;
+
+const db = getDb(Astro.locals.runtime.env.DB);
+const table = schema[tableName];
+const items = await db.select().from(table);
+
+// Fetch manufacturer names for items that have manufacturer_id
+const itemsWithManufacturers = await Promise.all(
+  items.map(async (item: any) => {
+    if (item.manufacturer_id) {
+      const manufacturerResult = await db
+        .select()
+        .from(schema.manufacturers)
+        .where(eq(schema.manufacturers.id, item.manufacturer_id));
+      return {
+        ...item,
+        _manufacturer: manufacturerResult[0],
+      };
+    }
+    return item;
+  })
+);
+
+// Helper to format field values
+function formatValue(key: string, value: any): string | null {
+  if (value === null || value === undefined) return null;
+
+  // Boolean fields
+  if (typeof value === 'boolean') {
+    return value ? 'Yes' : 'No';
+  }
+
+  // Date/timestamp fields
+  if (key.includes('date') && value instanceof Date) {
+    return value.toLocaleDateString();
+  }
+
+  // Numeric timestamps
+  if (key.includes('date') && typeof value === 'number') {
+    return new Date(value).toLocaleDateString();
+  }
+
+  return String(value);
+}
+
+// Helper to format field name for display
+function formatFieldName(key: string): string {
+  return key
+    .split('_')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
+// Fields to exclude from display
+const excludeFields = ['id', 'manufacturer_id', '_manufacturer'];
+---
+
+<div>
+  <h1>{title}</h1>
+  <p>{description}</p>
+
+  <div style="margin-top: 2rem;">
+    {itemsWithManufacturers.map((item: any) => (
+      <div style="border: 1px solid #ccc; padding: 1rem; margin: 1rem 0; border-radius: 8px;">
+        <h2>{item.name}</h2>
+        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+          {/* Show manufacturer if available */}
+          {item._manufacturer && (
+            <li><strong>Manufacturer:</strong> {item._manufacturer.name}</li>
+          )}
+
+          {/* Dynamically render all other fields from schema */}
+          {Object.entries(item)
+            .filter(([key]) => !excludeFields.includes(key) && key !== 'name')
+            .map(([key, value]) => {
+              const formattedValue = formatValue(key, value);
+              if (!formattedValue) return null;
+
+              // Special handling for URLs
+              if (key === 'url') {
+                return (
+                  <li>
+                    <strong>URL:</strong>{' '}
+                    <a href={String(value)} target="_blank" rel="noopener noreferrer">
+                      {String(value)}
+                    </a>
+                  </li>
+                );
+              }
+
+              return (
+                <li>
+                  <strong>{formatFieldName(key)}:</strong> {formattedValue}
+                </li>
+              );
+            })
+          }
+        </ul>
+      </div>
+    ))}
+  </div>
+</div>

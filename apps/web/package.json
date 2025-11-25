@@ -4,16 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
+    "dev": "cd ../../ && astro dev --root apps/web",
+    "start": "cd ../../ && astro dev --root apps/web",
     "build": "astro build",
     "preview": "wrangler pages dev ./dist",
-    "astro": "astro",
-    "db:generate": "NODE_OPTIONS='--import tsx' drizzle-kit generate",
-    "db:init:local": "wrangler d1 execute type-s-db --local --command 'SELECT 1'",
-    "db:migrate:local": "wrangler d1 migrations apply type-s-db --local",
-    "db:migrate:prod": "wrangler d1 migrations apply type-s-db --remote",
-    "db:studio": "NODE_OPTIONS='--import tsx' drizzle-kit studio"
+    "deploy": "cd ../../ && wrangler deploy",
+    "astro": "astro"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.8",

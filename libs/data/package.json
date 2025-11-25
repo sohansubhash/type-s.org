@@ -4,7 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "seed:local": "cd ../../apps/web && tsx ../../libs/data/seed-local.ts"
+    "generate:seed": "NODE_OPTIONS='--import tsx' node generate-seed-sql.ts",
+    "seed:local": "NODE_OPTIONS='--import tsx' node generate-seed-sql.ts && wrangler d1 execute type-s-db --local --file ./seed.sql",
+    "seed:prod": "NODE_OPTIONS='--import tsx' node generate-seed-sql.ts && wrangler d1 execute type-s-db --remote --file ./seed.sql"
   },
   "exports": {
     "./manufacturers/*": "./manufacturers/*.json",
@@ -19,8 +21,7 @@
     "./sb-stabs/*": "./sb-stabs/*.json",
     "./wires/*": "./wires/*.json",
     "./cases/*": "./cases/*.json",
-    "./models/*": "./models/*.json",
-    "./seed": "./seed.js"
+    "./models/*": "./models/*.json"
   },
   "dependencies": {
     "@type-s/schema": "workspace:*",

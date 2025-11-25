@@ -1,28 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getDb } from '../lib/db';
-import * as schema from '@type-s/schema';
-
-const db = getDb(Astro.locals.runtime.env.DB);
-const domes = await db.select().from(schema.domes);
+import PartsList from '../components/PartsList.astro';
 ---
 
 <Layout title="Topre Domes">
-  <h1>Topre Domes</h1>
-  <p>Rubber domes for Topre switches - the key to that legendary feel.</p>
-
-  <div style="margin-top: 2rem;">
-    {domes.map((dome) => (
-      <div style="border: 1px solid #ccc; padding: 1rem; margin: 1rem 0; border-radius: 8px;">
-        <h2>{dome.name}</h2>
-        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-          <li><strong>Part Number:</strong> {dome.partNumber || 'N/A'}</li>
-          <li><strong>Weight:</strong> {dome.weight}</li>
-          <li><strong>Type:</strong> {dome.type}</li>
-          <li><strong>Material:</strong> {dome.material}</li>
-          {dome.description && <li><strong>Description:</strong> {dome.description}</li>}
-        </ul>
-      </div>
-    ))}
-  </div>
+  <PartsList
+    tableName="domes"
+    title="Topre Domes"
+    description="Rubber domes for Topre switches - the key to that legendary feel."
+  />
 </Layout>

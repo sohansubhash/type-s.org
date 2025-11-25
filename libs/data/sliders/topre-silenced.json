@@ -2,8 +2,9 @@
   "id": 2,
   "manufacturer_id": 2,
   "name": "Topre Silenced Slider",
-  "description": "Type-S silenced slider with dampening rings",
-  "part_number": "TOPRE-SLIDER-SILENT",
+  "url": null,
+  "release_date": null,
+  "notes": "Type-S silenced slider with dampening rings. Part number: TOPRE-SLIDER-SILENT",
   "type": "Type-S",
   "silenced": true
 }

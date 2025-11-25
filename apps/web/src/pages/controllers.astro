@@ -1,27 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getDb } from '../lib/db';
-import * as schema from '@type-s/schema';
-
-const db = getDb(Astro.locals.runtime.env.DB);
-const controllers = await db.select().from(schema.controllers);
+import PartsList from '../components/PartsList.astro';
 ---
 
 <Layout title="HHKB Controllers">
-  <h1>HHKB Controllers</h1>
-  <p>Complete list of HHKB controllers and their specifications.</p>
-
-  <div style="margin-top: 2rem;">
-    {controllers.map((controller) => (
-      <div style="border: 1px solid #ccc; padding: 1rem; margin: 1rem 0; border-radius: 8px;">
-        <h2>{controller.name}</h2>
-        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-          <li><strong>Manufacturer:</strong> {controller.manufacturer || 'N/A'}</li>
-          <li><strong>Bluetooth:</strong> {controller.supportsBluetooth ? 'Yes' : 'No'}</li>
-          <li><strong>Firmware:</strong> {controller.firmware || 'N/A'}</li>
-          {controller.notes && <li><strong>Notes:</strong> {controller.notes}</li>}
-        </ul>
-      </div>
-    ))}
-  </div>
+  <PartsList
+    tableName="controllers"
+    title="HHKB Controllers"
+    description="Complete list of HHKB controllers and their specifications."
+  />
 </Layout>

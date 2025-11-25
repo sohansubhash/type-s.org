@@ -2,8 +2,9 @@
   "id": 1,
   "manufacturer_id": 2,
   "name": "Topre 45g Dome",
-  "description": "Standard 45g rubber dome for Topre switches",
-  "part_number": "TOPRE-DOME-45G",
+  "url": null,
+  "release_date": null,
+  "notes": "Standard 45g rubber dome for Topre switches. Part number: TOPRE-DOME-45G",
   "weight": "45g",
   "type": "Standard",
   "material": "Rubber"
