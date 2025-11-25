@@ -31,14 +31,20 @@ const { title } = Astro.props;
         margin-bottom: 2rem;
         padding-bottom: 1rem;
         border-bottom: 2px solid #eee;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1.5rem;
       }
       nav a {
-        margin-right: 1.5rem;
         text-decoration: none;
         color: #0066cc;
       }
       nav a:hover {
         text-decoration: underline;
+      }
+      nav .separator {
+        color: #ccc;
+        user-select: none;
       }
       h1 {
         margin-bottom: 1rem;
@@ -48,9 +54,24 @@ const { title } = Astro.props;
   <body>
     <nav>
       <a href="/">Home</a>
+      <span class="separator">|</span>
       <a href="/models">Models</a>
+      <span class="separator">|</span>
       <a href="/pcbs">PCBs</a>
       <a href="/controllers">Controllers</a>
+      <a href="/plates">Plates</a>
+      <a href="/cases">Cases</a>
+      <span class="separator">|</span>
+      <a href="/domes">Domes</a>
+      <a href="/sliders">Sliders</a>
+      <a href="/springs">Springs</a>
+      <a href="/housings">Housings</a>
+      <a href="/rings">Rings</a>
+      <span class="separator">|</span>
+      <a href="/sb-stabs">Stabs</a>
+      <a href="/wires">Wires</a>
+      <span class="separator">|</span>
+      <a href="/manufacturers">Manufacturers</a>
     </nav>
     <slot />
   </body>

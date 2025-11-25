@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getDb } from '../lib/db';
+import * as schema from '@type-s/schema';
+
+const db = getDb(Astro.locals.runtime.env.DB);
+const rings = await db.select().from(schema.rings);
+---
+
+<Layout title="Silencing Rings">
+  <h1>Silencing Rings</h1>
+  <p>Silencing rings for Topre switches to reduce noise.</p>
+
+  <div style="margin-top: 2rem;">
+    {rings.map((ring) => (
+      <div style="border: 1px solid #ccc; padding: 1rem; margin: 1rem 0; border-radius: 8px;">
+        <h2>{ring.name}</h2>
+        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+          <li><strong>Part Number:</strong> {ring.partNumber || 'N/A'}</li>
+          {ring.description && <li><strong>Description:</strong> {ring.description}</li>}
+        </ul>
+      </div>
+    ))}
+  </div>
+</Layout>

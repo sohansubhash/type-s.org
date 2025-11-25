@@ -10,7 +10,7 @@ import * as schema from '@type-s/schema';
  * const pcbs = await db.select().from(schema.pcbs);
  */
 export function getDb(d1: D1Database) {
-  return drizzle(d1, { schema });
+  return drizzle(d1, { schema, casing: 'snake_case' });
 }
 
 /**

@@ -1,0 +1,9 @@
+name = "type-s-data-seed"
+compatibility_date = "2024-01-01"
+
+# D1 Database binding (same as web app)
+[[d1_databases]]
+binding = "DB"
+database_name = "type-s-db"
+database_id = "4f70f843-2817-4c0e-910a-5a1a02362bb8"
+preview_database_id = "DB"

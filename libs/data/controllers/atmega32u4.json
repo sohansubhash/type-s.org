@@ -1,0 +1,9 @@
+{
+  "id": 1,
+  "manufacturer_id": 1,
+  "name": "ATmega32U4 Controller",
+  "description": "Standard ATmega32U4 microcontroller used in HHKB Pro 2",
+  "part_number": "ATMEGA32U4",
+  "supports_bluetooth": false,
+  "firmware": "HHKB Pro 2 Stock"
+}

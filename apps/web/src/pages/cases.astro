@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getDb } from '../lib/db';
+import * as schema from '@type-s/schema';
+
+const db = getDb(Astro.locals.runtime.env.DB);
+const cases = await db.select().from(schema.cases);
+---
+
+<Layout title="HHKB Cases">
+  <h1>HHKB Cases</h1>
+  <p>Cases and enclosures for HHKB keyboards.</p>
+
+  <div style="margin-top: 2rem;">
+    {cases.map((kbCase) => (
+      <div style="border: 1px solid #ccc; padding: 1rem; margin: 1rem 0; border-radius: 8px;">
+        <h2>{kbCase.name}</h2>
+        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+          <li><strong>Part Number:</strong> {kbCase.partNumber || 'N/A'}</li>
+          <li><strong>Color:</strong> {kbCase.color}</li>
+          <li><strong>Material:</strong> {kbCase.material}</li>
+          {kbCase.description && <li><strong>Description:</strong> {kbCase.description}</li>}
+        </ul>
+      </div>
+    ))}
+  </div>
+</Layout>

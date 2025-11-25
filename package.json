@@ -16,6 +16,7 @@
     "db:migrate:local": "pnpm --filter web db:migrate:local",
     "db:migrate:prod": "pnpm --filter web db:migrate:prod",
     "db:studio": "pnpm --filter web db:studio",
+    "db:seed:local": "pnpm --filter @type-s/data seed:local",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md,mdx,astro}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md,mdx,astro}\""
   },

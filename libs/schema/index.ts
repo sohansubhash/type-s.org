@@ -8,6 +8,10 @@ export * from './parts/plates';
 export * from './parts/domes';
 export * from './parts/sliders';
 export * from './parts/springs';
+export * from './parts/rings';
+export * from './parts/housings';
+export * from './parts/sb-stabs';
+export * from './parts/wires';
 export * from './parts/cases';
 
 // Export boards

@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getDb } from '../lib/db';
+import * as schema from '@type-s/schema';
+
+const db = getDb(Astro.locals.runtime.env.DB);
+const springs = await db.select().from(schema.springs);
+---
+
+<Layout title="Topre Springs">
+  <h1>Topre Springs</h1>
+  <p>Conical springs used in Topre switches.</p>
+
+  <div style="margin-top: 2rem;">
+    {springs.map((spring) => (
+      <div style="border: 1px solid #ccc; padding: 1rem; margin: 1rem 0; border-radius: 8px;">
+        <h2>{spring.name}</h2>
+        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+          <li><strong>Part Number:</strong> {spring.partNumber || 'N/A'}</li>
+          {spring.description && <li><strong>Description:</strong> {spring.description}</li>}
+        </ul>
+      </div>
+    ))}
+  </div>
+</Layout>

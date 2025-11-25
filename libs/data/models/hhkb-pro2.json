@@ -1,0 +1,18 @@
+{
+  "id": 1,
+  "manufacturer_id": 1,
+  "name": "HHKB Professional 2",
+  "layout": "HHKB 60%",
+  "model_number": "PD-KB400B",
+  "model_name": "Professional 2",
+  "case_color": "Black",
+  "keycap_color": "Black",
+  "legends": "Printed",
+  "generation": "Professional 2",
+  "type_s": false,
+  "notes": "Classic HHKB layout with 45g Topre switches",
+  "pcb_id": 1,
+  "controller_id": 1,
+  "dome_id": 1,
+  "slider_id": 1
+}

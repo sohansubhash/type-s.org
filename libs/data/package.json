@@ -3,10 +3,32 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "scripts": {
+    "seed:local": "cd ../../apps/web && tsx ../../libs/data/seed-local.ts"
+  },
   "exports": {
     "./manufacturers/*": "./manufacturers/*.json",
     "./pcbs/*": "./pcbs/*.json",
     "./controllers/*": "./controllers/*.json",
-    "./models/*": "./models/*.json"
+    "./plates/*": "./plates/*.json",
+    "./domes/*": "./domes/*.json",
+    "./sliders/*": "./sliders/*.json",
+    "./springs/*": "./springs/*.json",
+    "./rings/*": "./rings/*.json",
+    "./housings/*": "./housings/*.json",
+    "./sb-stabs/*": "./sb-stabs/*.json",
+    "./wires/*": "./wires/*.json",
+    "./cases/*": "./cases/*.json",
+    "./models/*": "./models/*.json",
+    "./seed": "./seed.js"
+  },
+  "dependencies": {
+    "@type-s/schema": "workspace:*",
+    "drizzle-orm": "^0.44.7"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250921.0",
+    "tsx": "^4.19.2",
+    "wrangler": "^4.38.0"
   }
 }

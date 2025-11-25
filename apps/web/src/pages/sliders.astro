@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getDb } from '../lib/db';
+import * as schema from '@type-s/schema';
+
+const db = getDb(Astro.locals.runtime.env.DB);
+const sliders = await db.select().from(schema.sliders);
+---
+
+<Layout title="Topre Sliders">
+  <h1>Topre Sliders</h1>
+  <p>Slider housings for Topre switches, including silenced variants.</p>
+
+  <div style="margin-top: 2rem;">
+    {sliders.map((slider) => (
+      <div style="border: 1px solid #ccc; padding: 1rem; margin: 1rem 0; border-radius: 8px;">
+        <h2>{slider.name}</h2>
+        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+          <li><strong>Part Number:</strong> {slider.partNumber || 'N/A'}</li>
+          <li><strong>Type:</strong> {slider.type}</li>
+          <li><strong>Silenced:</strong> {slider.silenced ? 'Yes' : 'No'}</li>
+          {slider.description && <li><strong>Description:</strong> {slider.description}</li>}
+        </ul>
+      </div>
+    ))}
+  </div>
+</Layout>

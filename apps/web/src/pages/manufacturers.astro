@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getDb } from '../lib/db';
+import * as schema from '@type-s/schema';
+
+const db = getDb(Astro.locals.runtime.env.DB);
+const manufacturers = await db.select().from(schema.manufacturers);
+---
+
+<Layout title="Manufacturers">
+  <h1>Manufacturers</h1>
+  <p>Companies and manufacturers in the HHKB ecosystem.</p>
+
+  <div style="margin-top: 2rem;">
+    {manufacturers.map((mfr) => (
+      <div style="border: 1px solid #ccc; padding: 1rem; margin: 1rem 0; border-radius: 8px;">
+        <h2>{mfr.name}</h2>
+        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+          {mfr.country && <li><strong>Country:</strong> {mfr.country}</li>}
+          {mfr.established && <li><strong>Established:</strong> {mfr.established}</li>}
+          {mfr.url && <li><strong>Website:</strong> <a href={mfr.url} target="_blank" rel="noopener noreferrer">{mfr.url}</a></li>}
+        </ul>
+      </div>
+    ))}
+  </div>
+</Layout>
